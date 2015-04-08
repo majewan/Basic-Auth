@@ -33,7 +33,8 @@ function json_basic_auth_handler( $user ) {
 	 * filter during authentication.
 	 */
 	remove_filter( 'determine_current_user', 'json_basic_auth_handler', 20 );
-
+	
+	do_action('wp_authenticate', $username, $password);
 	$user = wp_authenticate( $username, $password );
 
 	add_filter( 'determine_current_user', 'json_basic_auth_handler', 20 );
